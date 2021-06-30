@@ -1,0 +1,56 @@
+﻿@model Escape.Models.Art
+
+@{
+    ViewBag.Title = "Details";
+}
+<img id="backk" src="~/Poster/back.png" style="position:absolute; left:140px; top:70px; width: 30px; opacity: 0%;"/>
+<a id="back" style="position: absolute; left:200px; top: 70px;" class="btn btn-danger" href="/Art/Index">Back</a>
+<h2 style="font-size: 50px;">
+    @Html.DisplayFor(x => x.artName)
+</h2>
+
+<div>
+    <h4>Art</h4>
+    <hr />
+    @Html.HiddenFor(x => x.id)
+
+    <img height="500px" width="500px" style="margin-right:100px; float: left;" src=@Url.Content(@Model.artUrl) />
+    <div style="float: left;">
+        <p style="font-weight: bold;">
+            @Html.DisplayNameFor(model => model.desc)
+        </p>
+
+        <p>
+            @Html.DisplayFor(model => model.desc)
+        </p>
+    </div>
+    <p style="font-size: 30px; clear: both;">
+        @Html.DisplayFor(model => model.creator.name)
+    </p>
+</div>
+<p>
+        @{string userName = null;
+            for (int i = 0; i < User.Identity.Name.Length; i++)
+            {
+                if (User.Identity.Name[i].ToString() == "@") { break; }
+                userName += User.Identity.Name[i];
+            }
+        }
+
+        @if (userName == Model.creator.name) {
+        
+            <a href="/Art/Edit/@Model.id" class="btn btn-default">Edit</a>
+            <a href="/Art/Delete/@Model.id" class="btn btn-default">Delete</a>
+        }
+</p>
+@section Scripts{
+    <script>
+        $(function () {
+            $("#back").hover(function () {
+                $("#backk").animate({opacity: "100%" }, 1000);
+            }, function () {
+                    $("#backk").animate({opacity: "0%" }, 1000);
+            });
+        });
+    </script>    
+}
