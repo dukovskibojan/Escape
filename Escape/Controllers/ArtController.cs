@@ -1,5 +1,4 @@
-﻿
-using Escape.Models;
+﻿using Escape.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -35,14 +34,14 @@ namespace Escape.Controllers
         [Route("Art/AddSaveChanges/{anc}/{file}")]
         public ActionResult AddSaveChanges(aNc anc, HttpPostedFileBase file)
         {
-            string userName = null;
+            /*string userName = null;
             for (int i = 0; i < User.Identity.Name.Length; i++)
             {
                 if (User.Identity.Name[i].ToString() == "@") { break; }
                 userName += User.Identity.Name[i];
-            }
+            }*/
 
-            var creatorForBase = database.Creators.Single(x => x.name == userName);
+            var creatorForBase = database.Creators.Single(x => x.email == User.Identity.Name);
             var entry = database.Arts.Add(anc.art);
             entry.creator = creatorForBase;
             //fizicki se zacuvuva vo folderot Poster
@@ -72,9 +71,9 @@ namespace Escape.Controllers
                 }
 
                 var line = database.Arts.Single(x => x.id == id);
-                var owner = line.creator.name;
+                var owner = line.creator.email;
 
-                if (owner != userName) return Content("Not This Owner");
+                if (owner != User.Identity.Name) return Content("You are not owner of this art...");
 
                 var model = database.Arts.Single(x => x.id == id);
                 if (model == null) return HttpNotFound();

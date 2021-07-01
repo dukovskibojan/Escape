@@ -81,13 +81,13 @@ namespace Escape.Controllers
                 if (User.Identity.Name[i].ToString() == "@") { break; }
                 userName += User.Identity.Name[i];
             }
-            ViewBag.Creator = database.Creators.Single(x => x.name == userName);
+            ViewBag.Creator = database.Creators.Single(x => x.email == User.Identity.Name);
 
             List<Art> listData = database.Arts.ToList();
             List<string> arts = new List<string>();
             foreach (Art line in listData)
             {
-                if (line.creator.name == userName)
+                if (line.creator.email == User.Identity.Name)
                 {
                     arts.Add(line.artName.ToString());
                 }

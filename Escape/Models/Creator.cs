@@ -13,8 +13,8 @@ namespace Escape.Models
         public int id { get; set; }
         [Display (Name = "Creator")]
         public string name { get; set; }
-        [NotMapped]
-        public List<Art> arts { get; set; }
         public Creator() { }
+        public string username { get; set; }
+        public string email { get; set; }
     }
 }

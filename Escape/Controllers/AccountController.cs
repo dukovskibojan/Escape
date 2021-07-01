@@ -168,7 +168,7 @@ namespace Escape.Controllers
                         userName += model.Email[i];
                     }
 
-                    Creator C = new Creator { name = userName };
+                    Creator C = new Creator { email = model.Email, username = userName };
                     database.Creators.Add(C);
                     var userRole = UserManager.FindByEmail(model.Email);
                     UserManager.AddToRole(user.Id, "User");
@@ -402,7 +402,7 @@ namespace Escape.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Art");
         }
 
         //
@@ -459,7 +459,7 @@ namespace Escape.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Art");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
