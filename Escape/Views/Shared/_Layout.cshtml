@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Escape.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -17,14 +18,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Escape", "Index", "Art", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("All arts", "Index", "Art")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
-                    @Html.Partial("_LoginPartial")
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>

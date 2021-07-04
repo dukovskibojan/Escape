@@ -45,6 +45,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Mvc.JQuery.DataTables, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mvc.JQuery.DataTables.1.5.56\lib\net451\Mvc.JQuery.DataTables.dll</HintPath>
@@ -121,12 +127,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -198,6 +198,18 @@
     <Compile Include="Migrations\202107011416375_emailAdded.cs" />
     <Compile Include="Migrations\202107011416375_emailAdded.Designer.cs">
       <DependentUpon>202107011416375_emailAdded.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107011444372_removedNameCreator.cs" />
+    <Compile Include="Migrations\202107011444372_removedNameCreator.Designer.cs">
+      <DependentUpon>202107011444372_removedNameCreator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107012314345_usernameToRegister.cs" />
+    <Compile Include="Migrations\202107012314345_usernameToRegister.Designer.cs">
+      <DependentUpon>202107012314345_usernameToRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202107021838116_addedUsrName.cs" />
+    <Compile Include="Migrations\202107021838116_addedUsrName.Designer.cs">
+      <DependentUpon>202107021838116_addedUsrName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -408,6 +420,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Style\StyleCSS.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -448,6 +461,8 @@
     <Content Include="Views\Art\Details.cshtml" />
     <Content Include="Views\Art\Edit.cshtml" />
     <Content Include="Views\Art\Index.cshtml" />
+    <Content Include="Views\Account\changeUN_Partial.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -476,6 +491,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107011416375_emailAdded.resx">
       <DependentUpon>202107011416375_emailAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107011444372_removedNameCreator.resx">
+      <DependentUpon>202107011444372_removedNameCreator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107012314345_usernameToRegister.resx">
+      <DependentUpon>202107012314345_usernameToRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107021838116_addedUsrName.resx">
+      <DependentUpon>202107021838116_addedUsrName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

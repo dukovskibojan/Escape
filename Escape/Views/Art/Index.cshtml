@@ -3,48 +3,49 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="allArtsIndex" style="background-color: rgb(200,200,200);">
+    
+    <div  style="margin-top: -40px;">
+        <table id="data">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
 
-<!-- LOGO -->
-<h3>from reality</h3>
-
-<table id="data">
-    <thead>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </thead>
-        
 
             <!--<div style="display: inline; float: left; margin: 10px;" id="part">-->
 
-            
-    <tbody>
-        @foreach (Art art in Model)
-        {
-            <tr>
-                <td>
-                    <a href="/Art/Details/@art.id"> <img src=@Url.Content(art.artUrl) style="border-radius: 25px; height:250px; width:250px; position:relative; margin: 20px;" /></a>
-                </td>
-                <td >
-                    <p style="margin-left: 40px;" id="artName"><b style="font-size: 28px;">@art.artName</b></p><hr />
-                </td>
-                <td>
-                    <p style="margin-left: 70px;" class="creatorName">Artist: @art.creator.name</p>
-                </td>
-            </tr>
-        }
-    </tbody>
-        <!--</div>-->
+
+            <tbody>
+                @foreach (Art art in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="/Art/Details/@art.id"> <img src=@Url.Content(art.artUrl) style="border-radius: 25px; height:250px; width:250px; position:relative; margin: 20px;" /></a>
+                        </td>
+                        <td>
+                            <p style="margin-left: 40px;" id="artName"><b style="font-size: 28px;">@art.artName</b></p><hr />
+                        </td>
+                        <td>
+                            <p style="margin-left: 60px;" class="creatorName">Artist: @art.creator.username</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <!--</div>-->
 
 
-</table>
-<div>
-    <p id="add" style="color: lawngreen; font-size: 0px; position: absolute; bottom:70px; right:90px; width: 0px; height: 0px;">Add</p>
-    <a style="position: fixed; bottom: 60px; right: 80px;" href="/Art/Add"><img id="plus" height="60px" width="60px" src="~/Poster/add.png" alt="Add new art" /></a>
+        </table>
+    </div>
+    <div>
+        <p id="add" style="color: lawngreen; font-size: 0px; position: absolute; bottom:70px; right:90px; width: 0px; height: 0px;">Add</p>
+        <a style="position: fixed; bottom: 60px; right: 80px;" href="/Art/Add"><img id="plus" height="60px" width="60px" src="~/Poster/add.png" alt="Add new art" /></a>
+    </div>
+
 </div>
-
 @section Scripts{
     <script>
 
@@ -58,7 +59,7 @@
                 ],
                 //"order": [[1, 'asc']],
             });
-            
+
 
             $("#plus").hover(function () {
                 $("#add").animate({ height: "40px", width: "80px", fontSize: "50px", right: "160px" }, 1000);

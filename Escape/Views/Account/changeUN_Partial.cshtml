@@ -1,0 +1,13 @@
+﻿@model Escape.Models.Creator
+@{
+    ViewBag.Title = "changeUN_Partial";
+}
+
+<h2>changeUN_Partial</h2>
+
+@using (Html.BeginForm("ChangeUN","Account")){
+    @Html.HiddenFor(x => x.id)
+    <b><p>New Username: </p></b> <input type="text" name="q" value=""/>
+    <button type="submit" class="btn btn-default">Save</button>
+}
+

@@ -14,9 +14,16 @@ namespace Escape.Controllers
 {
     public class ArtController : Controller
     {
-        public ApplicationDbContext database = new ApplicationDbContext();
-       
-        protected override void Dispose(bool disposing)
+        public ApplicationDbContext database;
+        public UserManager<ApplicationUser> userManager;
+        public ArtController()
+        {
+            this.database = new ApplicationDbContext();
+            this.userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.database));
+
+    }
+
+    protected override void Dispose(bool disposing)
         {
             database.Dispose();
         }
@@ -27,6 +34,7 @@ namespace Escape.Controllers
         [Authorize]
         public ActionResult Add()
         {
+            ViewBag.username = userManager.FindById(User.Identity.GetUserId()).usrName;
             ViewBag.Creators = database.Creators.ToList();
             return View(new aNc());
         }
@@ -40,9 +48,9 @@ namespace Escape.Controllers
                 if (User.Identity.Name[i].ToString() == "@") { break; }
                 userName += User.Identity.Name[i];
             }*/
+            var entry = database.Arts.Add(anc.art);
 
             var creatorForBase = database.Creators.Single(x => x.email == User.Identity.Name);
-            var entry = database.Arts.Add(anc.art);
             entry.creator = creatorForBase;
             //fizicki se zacuvuva vo folderot Poster
             string path = System.IO.Path.Combine(Server.MapPath("~/Poster"), System.IO.Path.GetFileName(file.FileName));
@@ -63,13 +71,6 @@ namespace Escape.Controllers
         {
             if (User.IsInRole("Admin") || User.IsInRole("User"))
             {
-                string userName = null;
-                for (int i = 0; i < User.Identity.Name.Length; i++)
-                {
-                    if (User.Identity.Name[i].ToString() == "@") { break; }
-                    userName += User.Identity.Name[i];
-                }
-
                 var line = database.Arts.Single(x => x.id == id);
                 var owner = line.creator.email;
 

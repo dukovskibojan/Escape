@@ -150,7 +150,7 @@ namespace Escape.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, usrName = model.usrName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -161,14 +161,12 @@ namespace Escape.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                    string userName = null;
-                    for (int i = 0; i < model.Email.Length; i++)
-                    {
-                        if (model.Email[i].ToString() == "@") { break; }
-                        userName += model.Email[i];
-                    }
 
-                    Creator C = new Creator { email = model.Email, username = userName };
+                    var checkUN = database.Creators.Include(model.usrName);
+                    if (checkUN == null) return Content("username exists");
+                    
+
+                    Creator C = new Creator { email = model.Email, username = model.usrName };
                     database.Creators.Add(C);
                     var userRole = UserManager.FindByEmail(model.Email);
                     UserManager.AddToRole(user.Id, "User");
@@ -180,6 +178,14 @@ namespace Escape.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        public ActionResult ChangeUN(Creator c, string q)
+        {
+            var entry = database.Creators.Find(c.id);
+            entry.username = q;
+            TryUpdateModel(entry);
+            database.SaveChanges();
+            return View();
         }
 
         //
@@ -377,7 +383,7 @@ namespace Escape.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email.Split(' ')[0], Email = model.Email.Split(' ')[1] };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

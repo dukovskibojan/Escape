@@ -1,0 +1,9 @@
+﻿body {
+    background: url("/Poster/backfround.jpg");
+}
+.colorWhite{
+    color: white;
+}
+.float{
+    left: 50px;
+}

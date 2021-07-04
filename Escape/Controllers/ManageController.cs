@@ -75,12 +75,7 @@ namespace Escape.Controllers
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
 
             };
-            string userName = null;
-            for (int i = 0; i < User.Identity.Name.Length; i++)
-            {
-                if (User.Identity.Name[i].ToString() == "@") { break; }
-                userName += User.Identity.Name[i];
-            }
+            
             ViewBag.Creator = database.Creators.Single(x => x.email == User.Identity.Name);
 
             List<Art> listData = database.Arts.ToList();
