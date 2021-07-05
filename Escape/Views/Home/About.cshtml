@@ -3,7 +3,6 @@
         ViewBag.Title = "About";
     }
 
-
     <div style="display: block;">
         <a href="/Art/Index">
             <img style="margin-top: 30px; position:absolute; right:38%; height:100px; width: 400px;" src="~/Poster/LOGO.png" />
@@ -12,7 +11,11 @@
     <br /><br /><br /><br /><br />
     <div style="block;">
         <h2>@ViewBag.Title</h2>
-        <h4 style="color: lightgrey">@ViewBag.Message</h4>
+        <h4 id="startingText">@ViewBag.Message</h4>
+        <h4 id="textHere" style="color: lightgrey"></h4>
     </div>
 </div>
+@section Scripts{
 
+    <script src="~/Scripts/letters.js"></script>
+}

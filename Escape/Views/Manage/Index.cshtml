@@ -9,31 +9,30 @@
 
         <h1>@ViewBag.Creator.username's profile</h1>
 
-        <input type="button" class="btn btn-warning" value="Change username" id="changeUsername" />
 
         <p class="text-success">@ViewBag.StatusMessage</p>
 
         <div id="creatorInfo">
-            @Html.Label("Username: ")<p style="display:inline;" id="Un"> @ViewBag.Creator.username</p> <br />
+            @Html.Label("Username: ")<p style="display:inline;" id="Un"> @ViewBag.Creator.username</p>
 
-            <div id="changeUnBox" style="visibility: hidden;">
-                <!--ovde dosredi i dolu vo funkciite-->
+            <input type="button" class="btn-link" style="height:20px; color: darkred;" value="Change username" id="changeUsername" />
 
-
-
-
-
+            <div id="changeUN" style="opacity: 0%;">
+                <br />
+                <input id="in" style="color: black;" type="text" />
+                <br /><button style="color: red;" id="saveChanges">Save changes</button>
             </div>
 
-            @Html.Label("Email: ") @User.Identity.Name <br />
-            @Html.Label("Arts: ") 
-            <ul style="list-style: none;">
-                @foreach (string art in ViewBag.Arts)
-                {
-                    <li style="position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:20px; width: 20px; position: relative; top: -5px;"/>   @art</li>
-                }
-            </ul>
-            <br />
+            <div id="other" style="position: relative;">
+                @Html.Label("Email: ") @User.Identity.Name <br />
+                @Html.Label("Arts: ")
+                <ul style="list-style: none;">
+                    @foreach (string art in ViewBag.Arts)
+                    {
+                        <li style="position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:20px; width: 20px; position: relative; top: -5px;" />   @art</li>
+                    }
+                </ul>
+            </div>
         </div>
 
 
@@ -124,8 +123,22 @@
 @section Scripts{
     <script>
         $(function () {
+            $("#other").css({
+                "top": "-60px"
+            });
+            $("#changeUsername").hover(function () {
+                $(this).css("color", "red");
+            }, function () {
+                $(this).css("color", "darkred");
+            });
             $("#changeUsername").click(function () {
-                $("#changeUnBox").css("visibility", "visible");
+                $("#other").animate({ top: "20px" }, 1000);
+                $("#changeUN").animate({ opacity: "100%" }, 1000);
+            });
+            $("#saveChanges").click(function () {
+                var newUN = $("#in").val();
+                console.log(newUN);
+                window.location.href = "/Art/ChangeUsername?newUN= " + newUN;
             });
         });
     </script>

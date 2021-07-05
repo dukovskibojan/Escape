@@ -7,10 +7,6 @@
 }
 <div class="colorWhite">
 
-
-    <img id="backk" src="~/Poster/back.png" style="position:absolute; left:140px; top:70px; width: 30px; opacity: 0%;" />
-    <a id="back" style="position: absolute; left:200px; top: 70px;" class="btn btn-danger" href="/Art/Index">Back</a>
-
     <h2>ContactForm</h2>
     @Html.HiddenFor(x => x.creator.id)
 
@@ -51,10 +47,10 @@
 
 
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
+            <div style="margin-left: 162px;">
+                <img id="backk" src="~/Poster/back.png" style="position:relative; left:-10px; top:0px; width: 30px; opacity: 0%;" />
+                <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Back</a>
+                <input type="submit" value="Save" class="btn btn-default" style="left:0px;" />
             </div>
         </div>
     }

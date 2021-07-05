@@ -9,11 +9,11 @@
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <a href="/Art/Index">
-                    <img style="margin-top: -15px; position:absolute; right:300px; height:40px; width: 150px;" src="~/Poster/LOGO.png" />
+                    <img style="margin-top: -15px; position:absolute; right:350px; height:40px; width: 150px;" src="~/Poster/LOGO.png" />
                 </a>
             </li>
             <li>
-                @Html.ActionLink(User.Identity.Name, "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                @Html.ActionLink("My profile", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>

@@ -108,5 +108,23 @@ namespace Escape.Controllers
             var creators = database.Creators.ToList();
             return PartialView(creators);
         }
+        [Route("Art/ChangeUsername/{newUN}")]
+        public ActionResult ChangeUsername(string newUN)
+        {
+            if (newUN == null) return View("BadRequest");
+            var check = database.Creators.Where(x => x.username == newUN).FirstOrDefault();
+            if (check != null)
+            {
+                //ova napraj go da bidi partial navistina!!!!!!!!!!!!!!!!!!!
+                return View("usernameExists");
+            }
+            var entry = userManager.FindByEmail(User.Identity.Name);
+            entry.usrName = newUN;
+            var entry2 = database.Creators.Single(x => x.email == User.Identity.Name);
+            entry2.username = newUN;
+            TryUpdateModel(entry2);
+            database.SaveChanges();
+            return RedirectToAction("Index", "Manage");
+        }
     }
 }
