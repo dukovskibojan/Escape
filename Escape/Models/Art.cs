@@ -12,9 +12,12 @@ namespace Escape.Models
         [Key]
         public int id { get; set; }
         [Display (Name = "Name of the art")]
+        [Required]
         public string artName { get; set; }
+        [Required]
         public string artUrl { get; set; }
         [Display(Name = "Description about the art")]
+        [Required]
         public string desc { get; set; }
         public virtual Creator creator { get; set; }
     }

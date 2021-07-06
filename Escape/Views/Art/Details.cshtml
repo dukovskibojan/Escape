@@ -15,21 +15,21 @@
         @Html.HiddenFor(x => x.id)
 
         <img height="500px" width="500px" style=" margin-right:100px; float: left;" src=@Url.Content(@Model.artUrl) />
-
-        <a style="color: white;" href="/Art/CreatorDetails/@Model.creator.id">
-            <p style="font-size: 30px;">
+        
+        <a style=" text-decoration:none; color: white;" href="/Art/CreatorDetails/@Model.creator.id">
+            <p style="font-size: 30px;"><b style="color: grey; font-size: 20px;">Artist: </b>
                 @Html.DisplayFor(model => model.creator.username)
             </p>
         </a>
         <p class="length" style="font-size: 14px;">
             @Html.DisplayFor(model => model.creator.email)
         </p>
-        <img id="backk" src="~/Poster/back.png" style="position:absolute; left:-8%; bottom:0px; width: 30px; opacity: 0%;" />
-        <a id="back" style="position: absolute; left:0%; bottom: 0px;" class="btn btn-danger" href="/Art/Index">Back</a>
+        <img id="backk" src="~/Poster/back.png" style="position:absolute; left:-6%; bottom:0px; width: 30px; opacity: 0%;" />
+        <a id="back" style="position: absolute; left:0%; bottom: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
         @if (User.Identity.Name == Model.creator.email)
         {
 
-            <a href="/Art/Edit/@Model.id" class="btn btn-default" style="margin-left: 10.2%; position:relative; bottom:0px;">Edit</a>
+            <a href="/Art/Edit/@Model.id" class="btn btn-default" style="margin-left: 11.3%; position:relative; bottom:0px;">Edit</a>
             <a href="/Art/Delete/@Model.id" class="btn btn-default">Delete</a>
         }
     </div>

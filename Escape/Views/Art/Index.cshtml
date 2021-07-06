@@ -19,7 +19,13 @@
                 {
                     <tr>
                         <td>
-                            <a class="zoom" href="/Art/Details/@art.id"> <img src=@Url.Content(art.artUrl) class="zoomThis" style="border-bottom: solid grey 10px; border-radius: 25px; height:250px; width:250px; position:relative; margin: 20px;" /></a>
+                            <a class="zoom" href="/Art/Details/@art.id"> <img src=@Url.Content(art.artUrl) class="zoomThis" style="        
+        
+        border-radius: 25px;
+        height: 250px;
+        width: 250px;
+        position: relative;
+        margin: 20px;" /></a>
                         </td>
                         <td>
                             <a style="color: black;" href="/Art/Details/@art.id"><p style="width: 180px; left: 20px;" id="artName"><b style="font-size: 28px;">@art.artName</b></p></a>
@@ -54,6 +60,15 @@
                 $("#add").animate({ fontSize: "50px", right: "156px", opacity: "60%" }, 1000);
             }, function () {
                     $("#add").animate({ fontSize: "0px", right: "100px", opacity: "0%" }, 1000);
+            });
+            $(".zoomThis").mouseenter(function () {
+                $(this).css({ border: '0 solid #8a8a8a' }).animate({
+                    borderWidth: 7
+                }, 200);
+            }).mouseleave(function () {
+                $(this).animate({
+                    borderWidth: 0
+                }, 500);
             });
         });
     </script>

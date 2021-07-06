@@ -30,6 +30,10 @@
                 </ul>
             </div>
         </div>
+
+        <img id="backk" src="~/Poster/back.png" style="position:relative; left:0px; top:0px; width: 30px; opacity: 0%;" />
+        <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Back to Homescreen</a>
+
         <div style="position: absolute; bottom: 0px;">
             <h4>Change your account settings</h4>
             <hr />
@@ -130,6 +134,13 @@
                 var newUN = $("#in").val();
                 console.log(newUN);
                 window.location.href = "/Art/ChangeUsername?newUN= " + newUN;
+            });
+        });
+        $(function () {
+            $("#back").hover(function () {
+                $("#backk").animate({ opacity: "100%" }, 1000);
+            }, function () {
+                $("#backk").animate({ opacity: "0%" }, 1000);
             });
         });
     </script>

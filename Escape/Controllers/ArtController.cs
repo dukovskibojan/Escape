@@ -111,7 +111,7 @@ namespace Escape.Controllers
         [Route("Art/ChangeUsername/{newUN}")]
         public ActionResult ChangeUsername(string newUN)
         {
-            if (newUN == null) return View("BadRequest");
+            if (newUN == "") return View("BadRequest");
             var check = database.Creators.Where(x => x.username == newUN).FirstOrDefault();
             if (check != null)
             {

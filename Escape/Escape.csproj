@@ -211,6 +211,10 @@
     <Compile Include="Migrations\202107021838116_addedUsrName.Designer.cs">
       <DependentUpon>202107021838116_addedUsrName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202107062215141_requiredAdd.cs" />
+    <Compile Include="Migrations\202107062215141_requiredAdd.Designer.cs">
+      <DependentUpon>202107062215141_requiredAdd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\aNc.cs" />
@@ -503,6 +507,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202107021838116_addedUsrName.resx">
       <DependentUpon>202107021838116_addedUsrName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202107062215141_requiredAdd.resx">
+      <DependentUpon>202107062215141_requiredAdd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

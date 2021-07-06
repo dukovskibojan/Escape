@@ -3,5 +3,20 @@
     ViewBag.Title = "BadRequest";
 }
 
-<h2>BadRequest</h2>
+<div>
+    <h1 class="badRequest">Bad Request</h1>
+</div>
+<img id="backk" src="~/Poster/back.png" style="position:relative; left:10px; top:0px; width: 30px; opacity: 0%;" />
+<a id="back" style="position: relative; left:10px; top: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
+@section Scripts{
+    <script>
+        $(function () {
+            $("#back").hover(function () {
+                $("#backk").animate({ opacity: "100%" }, 1000);
+            }, function () {
+                $("#backk").animate({ opacity: "0%" }, 1000);
+            });
+        });
+    </script>
+}
 

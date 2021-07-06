@@ -8,21 +8,21 @@
     <h2>@Model.username's info</h2>
     <hr />
     <div style="position: relative;">
-        <h4 style="display:inline;">Username: </h4><p style="display:inline;" class="inline">@Model.username</p> <br />
-        <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@Model.email</p> <br />
-        <h4 style="display:inline;">Arts: </h4>
+        <h4 style="color: grey; display:inline;">Username: </h4><p style="font-size: 20px; display: inline;" class="inline">@Model.username</p> <br />
+        <h4 style="color: grey; display: inline;">Email: </h4><p style="font-size: 20px; display: inline;" class="inline">@Model.email</p> <br />
+        <h4 style="color: grey; display: inline;">Arts: </h4>
         <ul style="list-style: none;">
             @foreach (Art art in ViewBag.Arts)
             {
                 <a style="color:lightgreen" href="/Art/Details/@art.id">
-                    <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
+                    <li style="font-size: 20px; position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
                 </a>
             }
         </ul>
     </div>
 </div>
-<img id="backk" src="~/Poster/back.png" style="position:relative; left:-10px; top:0px; width: 30px; opacity: 0%;" />
-<a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Back</a>
+<img id="backk" src="~/Poster/back.png" style="position:relative; left:0px; top:0px; width: 30px; opacity: 0%;" />
+<a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
 @section Scripts{
     <script>
         $(function () {

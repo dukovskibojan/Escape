@@ -118,3 +118,4 @@ C:\Users\Bojan\source\repos\Escape\Escape\obj\Debug\Escape.Migrations.emailAdded
 C:\Users\Bojan\source\repos\Escape\Escape\obj\Debug\Escape.Migrations.removedNameCreator.resources
 C:\Users\Bojan\source\repos\Escape\Escape\obj\Debug\Escape.Migrations.usernameToRegister.resources
 C:\Users\Bojan\source\repos\Escape\Escape\obj\Debug\Escape.Migrations.addedUsrName.resources
+C:\Users\Bojan\source\repos\Escape\Escape\obj\Debug\Escape.Migrations.requiredAdd.resources

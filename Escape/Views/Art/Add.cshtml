@@ -3,11 +3,11 @@
 @model Escape.Models.aNc
 
 @{
-    ViewBag.Title = "ContactForm";
+    ViewBag.Title = "Add";
 }
 <div class="colorWhite">
 
-    <h2>ContactForm</h2>
+    <h2>Add art</h2>
     @Html.HiddenFor(x => x.creator.id)
 
     @using (Html.BeginForm("AddSaveChanges", "Art", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -16,7 +16,6 @@
         @Html.HiddenFor(x => x.creator.id)
         
         <div class="form-horizontal">
-            <h4>MemberModel</h4>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -48,8 +47,8 @@
 
 
             <div style="margin-left: 162px;">
-                <img id="backk" src="~/Poster/back.png" style="position:relative; left:-10px; top:0px; width: 30px; opacity: 0%;" />
-                <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Back</a>
+                <img id="backk" src="~/Poster/back.png" style="position:relative; left:0px; top:0px; width: 30px; opacity: 0%;" />
+                <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
                 <input type="submit" value="Save" class="btn btn-default" style="left:0px;" />
             </div>
         </div>
