@@ -126,5 +126,18 @@ namespace Escape.Controllers
             database.SaveChanges();
             return RedirectToAction("Index", "Manage");
         }
+        public ActionResult CreatorDetails(int id)
+        {
+            var creator = database.Creators.Single(x => x.id == id);
+            List<Art> arts = database.Arts.ToList();
+            List<Art> artsToView = new List<Art>();
+            foreach (Art art in arts)
+            {
+                if (art.creator.id == id)
+                    artsToView.Add(art);
+            }
+            ViewBag.Arts = artsToView;
+            return View(creator);
+        }
     }
 }

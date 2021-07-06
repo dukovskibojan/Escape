@@ -5,17 +5,11 @@
 }
 <div class="colorWhite">
     <div>
-
-
-        <h1>@ViewBag.Creator.username's profile</h1>
-
-
-        <p class="text-success">@ViewBag.StatusMessage</p>
-
+        <h1>@ViewBag.Creator.username's profile</h1><hr />
         <div id="creatorInfo">
-            @Html.Label("Username: ")<p style="display:inline;" id="Un"> @ViewBag.Creator.username</p>
+            <h4 style="display:inline;">Username: </h4><p class="inline" style="display:inline;" id="Un"> @ViewBag.Creator.username</p>
 
-            <input type="button" class="btn-link" style="height:20px; color: darkred;" value="Change username" id="changeUsername" />
+            <input type="button" class="btn btn-link ,inline" style="color: indianred" value="Change username" id="changeUsername" />
 
             <div id="changeUN" style="opacity: 0%;">
                 <br />
@@ -24,27 +18,24 @@
             </div>
 
             <div id="other" style="position: relative;">
-                @Html.Label("Email: ") @User.Identity.Name <br />
-                @Html.Label("Arts: ")
+                <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@User.Identity.Name</p> <br />
+                <h4 style="display:inline;">Arts: </h4>
                 <ul style="list-style: none;">
-                    @foreach (string art in ViewBag.Arts)
+                    @foreach (Art art in ViewBag.Arts)
                     {
-                        <li style="position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:20px; width: 20px; position: relative; top: -5px;" />   @art</li>
+                        <a style="color:lightgreen" href="/Art/Details/@art.id">
+                            <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
+                        </a>
                     }
                 </ul>
             </div>
         </div>
-
-
-
-
         <div style="position: absolute; bottom: 0px;">
             <h4>Change your account settings</h4>
             <hr />
             <dl class="dl-horizontal">
                 <dt>Password:</dt>
                 <dd>
-
                     @if (Model.HasPassword)
                     {
                         @Html.ActionLink("Change your password", "ChangePassword")

@@ -16,9 +16,11 @@
 
         <img height="500px" width="500px" style=" margin-right:100px; float: left;" src=@Url.Content(@Model.artUrl) />
 
-        <p style="font-size: 30px;">
-            @Html.DisplayFor(model => model.creator.username)
-        </p>
+        <a style="color: white;" href="/Art/CreatorDetails/@Model.creator.id">
+            <p style="font-size: 30px;">
+                @Html.DisplayFor(model => model.creator.username)
+            </p>
+        </a>
         <p class="length" style="font-size: 14px;">
             @Html.DisplayFor(model => model.creator.email)
         </p>

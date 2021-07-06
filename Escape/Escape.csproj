@@ -465,6 +465,7 @@
     <Content Include="Views\Account\changeUN_Partial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial2.cshtml" />
     <Content Include="Views\Art\usernameExists.cshtml" />
+    <Content Include="Views\Art\CreatorDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

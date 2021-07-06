@@ -1,0 +1,36 @@
+﻿@model Escape.Models.Creator
+@using Escape.Models
+@{
+    ViewBag.Title = "CreatorDetails";
+}
+
+<div class="colorWhite">
+    <h2>@Model.username's info</h2>
+    <hr />
+    <div style="position: relative;">
+        <h4 style="display:inline;">Username: </h4><p style="display:inline;" class="inline">@Model.username</p> <br />
+        <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@Model.email</p> <br />
+        <h4 style="display:inline;">Arts: </h4>
+        <ul style="list-style: none;">
+            @foreach (Art art in ViewBag.Arts)
+            {
+                <a style="color:lightgreen" href="/Art/Details/@art.id">
+                    <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
+                </a>
+            }
+        </ul>
+    </div>
+</div>
+<img id="backk" src="~/Poster/back.png" style="position:relative; left:-10px; top:0px; width: 30px; opacity: 0%;" />
+<a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Back</a>
+@section Scripts{
+    <script>
+        $(function () {
+            $("#back").hover(function () {
+                $("#backk").animate({ opacity: "100%" }, 1000);
+            }, function () {
+                $("#backk").animate({ opacity: "0%" }, 1000);
+            });
+        });
+    </script>
+}

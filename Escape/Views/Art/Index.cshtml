@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-<div class="allArtsIndex" style="background-color: rgb(200,200,200);">
+<div style="padding:80px; border-radius:20px; position:relative; background-color: rgb(200,200,200);">
     
     <div  style="margin-top: -40px;">
         <table id="data">
@@ -11,69 +11,50 @@
                 <tr>
                     <td></td>
                     <td></td>
-                    <td></td>
+                    <td style="position: relative; left: -200px;"></td>
                 </tr>
             </thead>
-
-
-            <!--<div style="display: inline; float: left; margin: 10px;" id="part">-->
-
-
             <tbody>
                 @foreach (Art art in Model)
                 {
                     <tr>
                         <td>
-                            <a href="/Art/Details/@art.id"> <img src=@Url.Content(art.artUrl) style="border-radius: 25px; height:250px; width:250px; position:relative; margin: 20px;" /></a>
+                            <a class="zoom" href="/Art/Details/@art.id"> <img src=@Url.Content(art.artUrl) class="zoomThis" style="border-bottom: solid grey 10px; border-radius: 25px; height:250px; width:250px; position:relative; margin: 20px;" /></a>
                         </td>
                         <td>
-                            <a href="/Art/Details/@art.id"><p style="margin-left: 40px;" id="artName"><b style="font-size: 28px;">@art.artName</b></p></a>
+                            <a style="color: black;" href="/Art/Details/@art.id"><p style="width: 180px; left: 20px;" id="artName"><b style="font-size: 28px;">@art.artName</b></p></a>
                         </td>
                         <td>
-                            <p style="margin-left: 60px;" class="creatorName">Artist: @art.creator.username</p>
+                            <a href="/Art/CreatorDetails/@art.creator.id"><p style="color: grey; position:relative; left: 60px; width: 300px;">Artist: @art.creator.username</p></a>
                         </td>
                     </tr>
                 }
             </tbody>
-            <!--</div>-->
-
-
         </table>
     </div>
     <div>
-        <p id="add" style="color: lawngreen; font-size: 0px; position: absolute; bottom:70px; right:90px; width: 0px; height: 0px;">Add</p>
+        <p id="add" style="color: lawngreen; font-size: 0px; position: fixed; bottom:70px; right:100px; width: 1px; height: 1px; opacity: 0%;">Add</p>
         <a style="position: fixed; bottom: 60px; right: 80px;" href="/Art/Add"><img id="plus" height="60px" width="60px" src="~/Poster/add.png" alt="Add new art" /></a>
     </div>
-
 </div>
 @section Scripts{
     <script>
 
         $(function () {
-
             $("#data").DataTable({
                 "columns": [
                     { "name": "first", "orderable": false },
                     { "name": "second", "orderable": false },
                     { "name": "third", "orderable": true },
                 ],
-                //"order": [[1, 'asc']],
+                "order": [[2, 'asc']],
             });
-
 
             $("#plus").hover(function () {
-                $("#add").animate({ height: "40px", width: "80px", fontSize: "50px", right: "160px" }, 1000);
+                $("#add").animate({ fontSize: "50px", right: "156px", opacity: "60%" }, 1000);
             }, function () {
-                $("#add").animate({ height: "0px", width: "0px", fontSize: "0px", right: "90px" }, 1000);
+                    $("#add").animate({ fontSize: "0px", right: "100px", opacity: "0%" }, 1000);
             });
-
-            /*var names;
-            $(".creatorName").each(function () {
-                name = $(this).text().split(":")[1];
-                names += name + " ";
-            });*/
-
-
         });
     </script>
 }
