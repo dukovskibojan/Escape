@@ -468,8 +468,10 @@
     <Content Include="Views\Art\Index.cshtml" />
     <Content Include="Views\Account\changeUN_Partial.cshtml" />
     <Content Include="Views\Shared\_LoginPartial2.cshtml" />
-    <Content Include="Views\Art\usernameExists.cshtml" />
     <Content Include="Views\Art\CreatorDetails.cshtml" />
+    <Content Include="Views\Manage\usernameExists.cshtml" />
+    <Content Include="Views\Manage\BadRequest.cshtml" />
+    <Content Include="Views\Manage\newUsername.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

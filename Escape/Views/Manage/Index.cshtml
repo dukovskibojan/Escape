@@ -5,65 +5,80 @@
 }
 <div class="colorWhite">
     <div>
-        <h1>@ViewBag.Creator.username's profile</h1><hr />
-        <div id="creatorInfo">
-            <h4 style="display:inline;">Username: </h4><p class="inline" style="display:inline;" id="Un"> @ViewBag.Creator.username</p>
+        <div id="ajax">
+            <h1>@ViewBag.Creator.username's profile</h1><hr />
 
+            <h4 style="display:inline;">Username: </h4><p class="inline" style="display:inline;" id="Un"> @ViewBag.Creator.username</p>
+        </div>
             <input type="button" class="btn btn-link ,inline" style="color: indianred" value="Change username" id="changeUsername" />
 
             <div id="changeUN" style="opacity: 0%;">
                 <br />
-                <input id="in" style="color: black;" type="text" />
-                <br /><button style="color: red;" id="saveChanges">Save changes</button>
+                @using (Ajax.BeginForm("ChangeUsername", "Manage",
+                    new AjaxOptions
+                    {
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "GET",
+                        UpdateTargetId = "ajax"
+                    }))
+                {
+                    <input id="in" style="color: black;" type="text" name="newUN" />
+                    <input type="hidden" name="oldUsername" value="@ViewBag.Creator.username"/>
+                    <input type="submit" value="Save changes" />
+                }
+                <div id="ajaxResults"></div>
             </div>
 
-            <div id="other" style="position: relative;">
-                <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@User.Identity.Name</p> <br />
-                <h4 style="display:inline;">Arts: </h4>
-                <ul style="list-style: none;">
-                    @foreach (Art art in ViewBag.Arts)
-                    {
-                        <a style="color:lightgreen" href="/Art/Details/@art.id">
-                            <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
-                        </a>
-                    }
-                </ul>
+
+
+
+                <div id="other" style="position: relative;">
+                    <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@User.Identity.Name</p> <br />
+                    <h4 style="display:inline;">Arts: </h4>
+                    <ul style="list-style: none;">
+                        @foreach (Art art in ViewBag.Arts)
+                        {
+                            <a style="color:lightgreen" href="/Art/Details/@art.id">
+                                <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
+                            </a>
+                        }
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <img id="backk" src="~/Poster/back.png" style="position:relative; left:0px; top:0px; width: 30px; opacity: 0%;" />
-        <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Back to Homescreen</a>
+            <img id="backk" src="~/Poster/back.png" style="position:relative; left:0px; top:0px; width: 30px; opacity: 0%;" />
+            <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
 
-        <div style="position: absolute; bottom: 0px;">
-            <h4>Change your account settings</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>Password:</dt>
-                <dd>
-                    @if (Model.HasPassword)
-                    {
-                        @Html.ActionLink("Change your password", "ChangePassword")
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Create", "SetPassword")
-                    }
-                    ]
-                </dd>
-                <dt>External Logins:</dt>
-                <dd>
-                    @Model.Logins.Count [
-                    @Html.ActionLink("Manage", "ManageLogins") ]
-                </dd>
-                @*
+            <div style="position: absolute; bottom: 0px;">
+                <h4>Change your account settings</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>Password:</dt>
+                    <dd>
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Change your password", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Create", "SetPassword")
+                        }
+                        ]
+                    </dd>
+                    <dt>External Logins:</dt>
+                    <dd>
+                        @Model.Logins.Count [
+                        @Html.ActionLink("Manage", "ManageLogins") ]
+                    </dd>
+                    @*
                     Phone Numbers can used as a second factor of verification in a two-factor authentication system.
 
                      See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
                         for details on setting up this ASP.NET application to support two-factor authentication using SMS.
 
                      Uncomment the following block after you have set up two-factor authentication
-                *@
-                @*
+                    *@
+                    @*
                     <dt>Phone Number:</dt>
                     <dd>
                         @(Model.PhoneNumber ?? "None")
@@ -82,14 +97,14 @@
                             <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
                         }
                     </dd>
-                *@
-                <dt>Two-Factor Authentication:</dt>
-                <dd>
-                    <p>
-                        There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                        for details on setting up this ASP.NET application to support two-factor authentication.
-                    </p>
-                    @*@if (Model.TwoFactor)
+                    *@
+                    <dt>Two-Factor Authentication:</dt>
+                    <dd>
+                        <p>
+                            There are no two-factor authentication providers configured. See <a href="https://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                            for details on setting up this ASP.NET application to support two-factor authentication.
+                        </p>
+                        @*@if (Model.TwoFactor)
                         {
                             using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
@@ -109,17 +124,17 @@
                                 </text>
                             }
                         }*@
-                </dd>
-            </dl>
-        </div>
+                    </dd>
+                </dl>
+            </div>
 
+        </div>
     </div>
-</div>
 @section Scripts{
     <script>
         $(function () {
             $("#other").css({
-                "top": "-60px"
+                "top": "-50px"
             });
             $("#changeUsername").hover(function () {
                 $(this).css("color", "red");
@@ -130,11 +145,7 @@
                 $("#other").animate({ top: "20px" }, 1000);
                 $("#changeUN").animate({ opacity: "100%" }, 1000);
             });
-            $("#saveChanges").click(function () {
-                var newUN = $("#in").val();
-                console.log(newUN);
-                window.location.href = "/Art/ChangeUsername?newUN= " + newUN;
-            });
+            
         });
         $(function () {
             $("#back").hover(function () {
@@ -144,4 +155,5 @@
             });
         });
     </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 }

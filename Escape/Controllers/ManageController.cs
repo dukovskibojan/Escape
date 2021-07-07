@@ -8,19 +8,27 @@ using Microsoft.Owin.Security;
 using Escape.Models;
 using System.Collections.Generic;
 using Escape;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Escape.Controllers
 {
     [Authorize]
     public class ManageController : Controller
     {
-        public ApplicationDbContext database = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        public ApplicationDbContext database;
+        public UserManager<ApplicationUser> userManager;
         public ManageController()
         {
+            this.database = new ApplicationDbContext();
+            this.userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(this.database));
+
         }
+
+
+        
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -398,6 +406,25 @@ namespace Escape.Controllers
             RemoveLoginSuccess,
             RemovePhoneSuccess,
             Error
+        }
+
+        public ActionResult ChangeUsername(string newUN, string oldUsername)
+        {
+            if (newUN == "") return View("BadRequest");
+            var check = database.Creators.Where(x => x.username == newUN).FirstOrDefault();
+            ViewBag.username = newUN;
+            ViewBag.oldUsername = oldUsername;
+            if (check != null)
+            {
+                return PartialView("usernameExists");
+            }
+            var entry = userManager.FindByEmail(User.Identity.Name);
+            entry.usrName = newUN;
+            var entry2 = database.Creators.Single(x => x.email == User.Identity.Name);
+            entry2.username = newUN;
+            TryUpdateModel(entry2);
+            database.SaveChanges();
+            return PartialView("newUsername");
         }
 
         #endregion
