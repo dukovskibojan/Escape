@@ -13,26 +13,15 @@
         <input type="button" class="btn btn-link ,inline" style="color: indianred" value="Change username" id="changeUsername" />
 
         <div id="changeUN" style="opacity: 0%;">
-            <br />
-            @using (Ajax.BeginForm("ChangeUsername", "Manage",
-                new AjaxOptions
-                {
-                    InsertionMode = InsertionMode.Replace,
-                    HttpMethod = "GET",
-                    UpdateTargetId = "ajax"
-                }))
-            {
-                <input id="in" style="color: black;" type="text" name="newUN"/>
-                <input type="hidden" name="oldUsername" value="@ViewBag.Creator.username" />
-                <input type="submit" value="Save changes" id="changed" class="btnOutlineDanger" style=" border: solid 3px rgb(196, 27, 44);
+
+            <input id="in" style="color: black;" type="text" name="newUN" />
+            <input type="hidden" name="oldUsername" value="@ViewBag.Creator.username" id="oldUN" />
+            <input type="submit" value="Save changes" id="changed" class="btnOutlineDanger" style=" border: solid 3px rgb(196, 27, 44);
                                                                                                         background-color: white;
                                                                                                         border-radius: 8px;
-                                                                                                        color: darkred;"/>
-            }
+                                                                                                        color: darkred;" />
+
         </div>
-
-
-
 
         <div id="other" style="position: relative;">
             <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@User.Identity.Name</p> <br />
@@ -136,7 +125,7 @@
     <script>
         $(function () {
             $("#other").css({
-                "top": "-50px"
+                "top": "-20px"
             });
             $("#changeUsername").hover(function () {
                 $(this).css("color", "red");
@@ -147,7 +136,26 @@
                 $("#other").animate({ top: "20px" }, 1000);
                 $("#changeUN").animate({ opacity: "100%" }, 1000);
             });
-            
+
+            $("#changed").click(function () {
+                var newUsername = $("#in").val();
+                var oldUsername = $("#oldUN").val();
+                $.ajax({
+                    type: "GET",
+                    url: '/Manage/ChangeUsername',
+                    data: jQuery.param({ newUN: newUsername, oldUsername: oldUsername }),
+                    contentType: false,
+                    processData: false,
+                    success: function (results) {
+                        $("#ajax").html(results);
+                        if ($("#checkWhichPartial").attr("vall") == "true") {
+                            $("#changeUN").hide();
+                            $("#changeUsername").hide();
+                        }
+                    }
+                });
+            });
+
         });
         $(function () {
             $("#changed").hover(function () {
@@ -155,9 +163,11 @@
             }, function () {
                 $(this).css("background", "white");
             });
+            /*
             $("#changed").click(function () {
                 $("#changeUsername, #changeUN").hide();
-            })
+            });
+             */
             $("#back").hover(function () {
                 $("#backk").animate({ opacity: "100%" }, 1000);
             }, function () {
