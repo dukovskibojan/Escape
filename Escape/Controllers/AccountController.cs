@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Escape.Models;
 using Escape;
+using System.Collections.Generic;
 
 namespace Escape.Controllers
 {
@@ -495,6 +496,23 @@ namespace Escape.Controllers
                 }
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
+        }
+        public ActionResult AddUserToRole()
+        {
+            AddToRoleModel model = new AddToRoleModel();
+            model.Roles = new List<string> { "Admin", "User"};
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult AddUserToRole(AddToRoleModel model)
+        {
+            var user = UserManager.FindByEmail(model.Email);
+            if (user != null)
+            {
+                UserManager.AddToRole(user.Id, model.SelectedRole);
+                return RedirectToAction("Index", "Art");
+            }
+            return Content("User not found");
         }
         #endregion
     }

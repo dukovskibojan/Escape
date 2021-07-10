@@ -66,7 +66,7 @@ namespace Escape.Controllers
 
             //return View("BadRequest");
         }
-        [Authorize(Roles = "User")]
+        [Authorize(Roles = "User, Admin")]
         public ActionResult Edit(int id)
         {
             if (User.IsInRole("Admin") || User.IsInRole("User"))

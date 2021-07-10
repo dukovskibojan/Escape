@@ -15,9 +15,10 @@
         @Html.HiddenFor(x => x.id)
 
         <img height="500px" width="500px" style=" margin-right:100px; float: left;" src=@Url.Content(@Model.artUrl) />
-        
+
         <a style=" text-decoration:none; color: white;" href="/Art/CreatorDetails/@Model.creator.id">
-            <p style="font-size: 30px;"><b style="color: grey; font-size: 20px;">Artist: </b>
+            <p style="font-size: 30px;">
+                <b style="color: grey; font-size: 20px;">Artist: </b>
                 @Html.DisplayFor(model => model.creator.username)
             </p>
         </a>
@@ -28,9 +29,12 @@
         <a id="back" style="position: absolute; left:0%; bottom: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
         @if (User.Identity.Name == Model.creator.email)
         {
-
             <a href="/Art/Edit/@Model.id" class="btn btn-default" style="margin-left: 11.3%; position:relative; bottom:0px;">Edit</a>
             <a href="/Art/Delete/@Model.id" class="btn btn-default">Delete</a>
+        }
+        else if (User.IsInRole("Admin"))
+        {
+            <a style="margin-left: 11.3%" href="/Art/Delete/@Model.id" class="btn btn-default">Delete</a>
         }
     </div>
     <div style="float: left;

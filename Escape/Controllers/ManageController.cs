@@ -416,8 +416,10 @@ namespace Escape.Controllers
             ViewBag.oldUsername = oldUsername;
             if (check != null)
             {
+                ViewBag.boolean = "false";
                 return PartialView("usernameExists");
             }
+            ViewBag.boolean = "true";
             var entry = userManager.FindByEmail(User.Identity.Name);
             entry.usrName = newUN;
             var entry2 = database.Creators.Single(x => x.email == User.Identity.Name);

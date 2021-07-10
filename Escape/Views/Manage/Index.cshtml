@@ -10,44 +10,46 @@
 
             <h4 style="display:inline;">Username: </h4><p class="inline" style="display:inline;" id="Un"> @ViewBag.Creator.username</p>
         </div>
-            <input type="button" class="btn btn-link ,inline" style="color: indianred" value="Change username" id="changeUsername" />
+        <input type="button" class="btn btn-link ,inline" style="color: indianred" value="Change username" id="changeUsername" />
 
-            <div id="changeUN" style="opacity: 0%;">
-                <br />
-                @using (Ajax.BeginForm("ChangeUsername", "Manage",
-                    new AjaxOptions
-                    {
-                        InsertionMode = InsertionMode.Replace,
-                        HttpMethod = "GET",
-                        UpdateTargetId = "ajax"
-                    }))
+        <div id="changeUN" style="opacity: 0%;">
+            <br />
+            @using (Ajax.BeginForm("ChangeUsername", "Manage",
+                new AjaxOptions
                 {
-                    <input id="in" style="color: black;" type="text" name="newUN" />
-                    <input type="hidden" name="oldUsername" value="@ViewBag.Creator.username"/>
-                    <input type="submit" value="Save changes" />
+                    InsertionMode = InsertionMode.Replace,
+                    HttpMethod = "GET",
+                    UpdateTargetId = "ajax"
+                }))
+            {
+                <input id="in" style="color: black;" type="text" name="newUN"/>
+                <input type="hidden" name="oldUsername" value="@ViewBag.Creator.username" />
+                <input type="submit" value="Save changes" id="changed" class="btnOutlineDanger" style=" border: solid 3px rgb(196, 27, 44);
+                                                                                                        background-color: white;
+                                                                                                        border-radius: 8px;
+                                                                                                        color: darkred;"/>
+            }
+        </div>
+
+
+
+
+        <div id="other" style="position: relative;">
+            <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@User.Identity.Name</p> <br />
+            <h4 style="display:inline;">Arts: </h4>
+            <ul style="list-style: none;">
+                @foreach (Art art in ViewBag.Arts)
+                {
+                    <a style="color:lightgreen" href="/Art/Details/@art.id">
+                        <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
+                    </a>
                 }
-                <div id="ajaxResults"></div>
-            </div>
+            </ul>
+        </div>
+    </div>
 
-
-
-
-                <div id="other" style="position: relative;">
-                    <h4 style="display:inline;">Email: </h4><p style="display:inline;" class="inline">@User.Identity.Name</p> <br />
-                    <h4 style="display:inline;">Arts: </h4>
-                    <ul style="list-style: none;">
-                        @foreach (Art art in ViewBag.Arts)
-                        {
-                            <a style="color:lightgreen" href="/Art/Details/@art.id">
-                                <li style=" position: relative; top: -20px;"><img src="~/Poster/arrow.png" style="height:15px; width: 15px; position: relative; top: -3px;" /> @art.artName</li>
-                            </a>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <img id="backk" src="~/Poster/back.png" style="position:relative; left:0px; top:0px; width: 30px; opacity: 0%;" />
-            <a id="back" style="position: relative; left:0px; top: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
+            <img id="backk" src="~/Poster/back.png" style="position:relative; left:-33px; top:0px; width: 30px; opacity: 0%;" />
+            <a id="back" style="position: relative; left:-33px; top: 0px;" class="btn btn-danger" href="/Art/Index">Home</a>
 
             <div style="position: absolute; bottom: 0px;">
                 <h4>Change your account settings</h4>
@@ -139,7 +141,7 @@
             $("#changeUsername").hover(function () {
                 $(this).css("color", "red");
             }, function () {
-                $(this).css("color", "darkred");
+                $(this).css("color", "indianred");
             });
             $("#changeUsername").click(function () {
                 $("#other").animate({ top: "20px" }, 1000);
@@ -148,6 +150,14 @@
             
         });
         $(function () {
+            $("#changed").hover(function () {
+                $(this).css("background", "antiquewhite");
+            }, function () {
+                $(this).css("background", "white");
+            });
+            $("#changed").click(function () {
+                $("#changeUsername, #changeUN").hide();
+            })
             $("#back").hover(function () {
                 $("#backk").animate({ opacity: "100%" }, 1000);
             }, function () {
